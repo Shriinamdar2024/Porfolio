@@ -9,7 +9,7 @@ const app = express();
 // 1. UPDATED CORS: Add your Vercel URL here once you get it!
 // For now, this configuration allows your local machine and future Vercel site
 app.use(cors({
-    origin: ["http://localhost:3000", "https://portfolio-frontend-phi-wine.vercel.app"],
+    origin: ["https://portfolio-frontend-ukut.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
