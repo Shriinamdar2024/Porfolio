@@ -9,9 +9,10 @@ const app = express();
 // 1. UPDATED CORS: Add your Vercel URL here once you get it!
 // For now, this configuration allows your local machine and future Vercel site
 app.use(cors({
-    origin: ["https://portfolio-frontend-ukut.vercel.app"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
+  origin: "https://portfolio-frontend-ukut.vercel.app", // Your Vercel URL
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true, // Crucial for passing the token
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 app.use(express.json({ limit: '50mb' }));
