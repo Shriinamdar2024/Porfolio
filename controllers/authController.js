@@ -1,10 +1,12 @@
 const jwt = require('jsonwebtoken');
 
 exports.login = (req, res) => {
-    // The password received here is now the SHA-512 hash from the frontend
+    // 1. Get the password from the frontend request
     const { password } = req.body;
-
-    // SECURE: Strict comparison with the hashed value in .env
+    console.log("Password from .env:", process.env.ADMIN_PASSWORD);
+  console.log("Password entered by you:", password);
+    // 2. Compare it with the .env variable
+    // Check if process.env.ADMIN_PASSWORD is being read correctly
     if (password === process.env.ADMIN_PASSWORD) {
         const token = jwt.sign(
             { admin: true }, 
@@ -14,6 +16,6 @@ exports.login = (req, res) => {
         return res.json({ token });
     }
 
-    // Generic error to prevent brute-force discovery
-    res.status(401).json({ message: "SEC_ERROR: ACCESS_DENIED" });
+    // 3. If it fails, send 401 (This is what you are seeing)
+    res.status(401).json({ message: "Invalid Admin Credentials" });
 };
