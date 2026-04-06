@@ -6,12 +6,22 @@ const path = require('path');
 
 const app = express();
 
-// 1. UPDATED CORS: Add your Vercel URL here once you get it!
-// For now, this configuration allows your local machine and future Vercel site
+const allowedOrigins = [
+  "http://localhost:5173", // local dev
+  "http://localhost:3000", // optional
+  "https://portfolio-frontend-ukut.vercel.app" // your deployed frontend
+];
+
 app.use(cors({
-  origin: "https://portfolio-frontend-ukut.vercel.app", // Your Vercel URL
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS Not Allowed"));
+    }
+  },
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true, // Crucial for passing the token
+  credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
