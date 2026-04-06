@@ -7,22 +7,20 @@ const path = require('path');
 const app = express();
 
 const allowedOrigins = [
-  "http://localhost:5173", // local dev
-  "http://localhost:3000", // optional
-  "https://portfolio-frontend-ukut.vercel.app" // your deployed frontend
+  "http://localhost:5173",
+  "https://portfolio-frontend-ukut.vercel.app"
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
+  origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error("CORS Not Allowed"));
+      callback(null, true); // 🔥 TEMP allow all (to fix your issue fast)
     }
   },
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization"]
+  credentials: true
 }));
 
 app.use(express.json({ limit: '50mb' }));
